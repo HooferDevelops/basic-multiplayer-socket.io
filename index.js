@@ -69,7 +69,6 @@ io.on('connection', (socket) => {
    it's look direction is 100% random
 */
 
-//le.anercracker@gmail.com
 var bot = new template("BOT");
 users["BOT"] = bot;
 users["BOT"].y = 25;
