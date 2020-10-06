@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
     users[socket.id] = user;
     /* on player leaving */
     socket.on("disconnect", ()=>{
-        io.emit("updatePosition", {id: socket.id, color:"", x:0,y:5000});
+        io.emit("updatePosition", {id: socket.id, color:"", x:0,y:270});
         // hacky but it works, i mean it's a snap game ^
         delete users[socket.id];
         console.log("User Disconnected");
@@ -69,6 +69,7 @@ io.on('connection', (socket) => {
    it's look direction is 100% random
 */
 
+//le.anercracker@gmail.com
 var bot = new template("BOT");
 users["BOT"] = bot;
 users["BOT"].y = 25;
