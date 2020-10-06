@@ -2,7 +2,7 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
-http.listen(process.env.PORT || 3000);
+http.listen(8080);
 
 /* USER TEMPLATE */
 
@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
     users[socket.id] = user;
     /* on player leaving */
     socket.on("disconnect", ()=>{
-        io.emit("updatePosition", {id: socket.id, color:"#000000", x:0,y:270});
+        io.emit("updatePosition", {id: socket.id, color:"#000000", x:0,y:270, mx: 0, my: 0});
         // hacky but it works, i mean it's a snap game ^
         delete users[socket.id];
         console.log("User Disconnected");
