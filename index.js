@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
     console.log("User Connected");
     var user = new template(socket.id);
     user.id = socket.id;
+    users[socket.id] = user;
     /* on player leaving */
     socket.on("disconnect", ()=>{
         io.emit("updatePosition", {id: socket.id, y:360, dir: 0});
@@ -49,6 +50,4 @@ io.on('connection', (socket) => {
             socket.emit('userJoin', users[u]);
         }
     });
-
-    users[socket.id] = user;
 })
