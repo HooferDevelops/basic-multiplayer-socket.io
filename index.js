@@ -39,19 +39,24 @@ io.on('connection', (socket) => {
         delete users[socket.id];
         console.log("User Disconnected");
     })
-    /* movement packet */
-    socket.on("update", (data)=> {
+    /* paddle movement */
+    socket.on("paddle", (data)=> {
         users[socket.id].y = data.contents[0]
         users[socket.id].dir = data.contents[1]
-        io.emit("update", users[socket.id])
+        io.emit("paddle", users[socket.id])
     })
-    /* hit the ball */
-    socket.on("hit", (data)=> {
-        io.emit("hit", {
+    /* ball movement */
+    socket.on("ball", (data)=> {
+        io.emit("ball", {
             x: data.contents[0],
-            y: data.contents[1],
-            dir: data.contents[2],
-            speed: data.contents[3]
+            y: data.contents[1]
+        })
+    })
+    /* dubs */
+    socket.on("score", (data)=> {
+        io.emit("score", {
+            blue: data.contents[0],
+            red: data.contents[1]
         })
     })
     io.emit('join', users[socket.id])
