@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
     users[socket.id] = user;
     /* on player leaving */
     socket.on("disconnect", ()=>{
-        io.emit("leave", {id: socket.id})
+        io.emit("stop", {})
         delete users[socket.id];
         console.log("User Disconnected");
     })
