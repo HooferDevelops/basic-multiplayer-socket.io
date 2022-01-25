@@ -50,7 +50,8 @@ io.on('connection', (socket) => {
         io.emit("hit", {
             x: data.contents[0],
             y: data.contents[1],
-            dir: data.contents[2]
+            dir: data.contents[2],
+            speed: data.contents[3]
         })
     })
     io.emit('join', users[socket.id])
