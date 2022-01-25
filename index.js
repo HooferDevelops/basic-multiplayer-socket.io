@@ -4,20 +4,23 @@ var io = require('socket.io')(http);
 
 http.listen(process.env.PORT || 3030);
 
+/* ONLINE USER LIST */
+
+var users = {}
+var playerindex = 0
+
 /* USER TEMPLATE */
 
 function template(id){
     if (!id) id = "";
+    playerindex += 1
     return {
         id: id,
+        index: playerindex,
         y: 0,
         dir: 0,
     }
 }
-
-/* ONLINE USER LIST */
-
-var users = {}
 
 /* MOVEMENT + PLAYER SYSTEM */
 /* INFO:
