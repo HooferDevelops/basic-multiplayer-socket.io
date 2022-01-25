@@ -35,22 +35,21 @@ io.on('connection', (socket) => {
     users[socket.id] = user;
     /* on player leaving */
     socket.on("disconnect", ()=>{
-        io.emit("updatePosition", {id: socket.id, y:360, dir: 0});
-        // hacky but it works, i mean it's a snap game ^
+        io.emit("leave", {id: socket.id})
         delete users[socket.id];
         console.log("User Disconnected");
     })
     /* movement packet */
-    socket.on("updatePosition", (data)=> {
+    socket.on("update", (data)=> {
         users[socket.id].y = data.contents[0]
         users[socket.id].dir = data.contents[1]
-        io.emit("updatePosition", users[socket.id])
+        io.emit("update", users[socket.id])
     })
-    io.emit('userJoin', users[socket.id])
+    io.emit('join', users[socket.id])
     /* tell the joining player all other players online */
     Object.keys(users).forEach(u => {
         if (users[u].id !== socket.id){
-            socket.emit('userJoin', users[u]);
+            socket.emit('join', users[u]);
         }
     });
 })
