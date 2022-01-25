@@ -60,15 +60,6 @@ io.on('connection', (socket) => {
         })
     })
 
-    // big dubs
-    socket.on("win", (data)=> {
-        io.emit("win", {
-            blue: data.contents[0],
-            red: data.contents[1],
-            user: data.contents[2],
-        })
-    })
-
     // tell other clients that I joined.
     io.emit('join', users[socket.id]) 
 
