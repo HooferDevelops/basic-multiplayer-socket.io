@@ -45,6 +45,14 @@ io.on('connection', (socket) => {
         users[socket.id].dir = data.contents[1]
         io.emit("update", users[socket.id])
     })
+    /* hit the ball */
+    socket.on("hit", (data)=> {
+        io.emit("hit", {
+            x: data.contents[0],
+            y: data.contents[1],
+            dir: data.contents[2]
+        })
+    })
     io.emit('join', users[socket.id])
     /* tell the joining player all other players online */
     Object.keys(users).forEach(u => {
